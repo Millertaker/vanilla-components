@@ -32,7 +32,7 @@ gulp.task('traspile-scripts', function() {
   return gulp.src('./public/src/app.js')
     .pipe(webpack(webpackConfig))
     .pipe(gulp.dest('./build'))
-    .pipe(gulp.dest('./server/js'));
+    .pipe(gulp.dest('./docs/js'));
 });
 
 gulp.task('less', function(){
@@ -41,7 +41,7 @@ gulp.task('less', function(){
     .pipe(concat('allmin.css'))
     .pipe(less())
     .pipe(gulp.dest('./build'))
-    .pipe(gulp.dest('./server/css'));
+    .pipe(gulp.dest('./docs/css'));
 });
 
 gulp.task('watch-fe', function(){
