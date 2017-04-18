@@ -17,6 +17,7 @@ var plumber = require('gulp-plumber');
 
 var webpack = require('webpack-stream');
 var webpackConfig = require('../webpack.config.js');
+var webpackConfigDocs = require('../webpack.config.docs.js');
 
 var webserver = require('gulp-webserver');
 
@@ -37,7 +38,7 @@ gulp.task('traspile-scripts', function() {
 
 gulp.task('docs-scripts', function() {
   return gulp.src('./public/src/app.js')
-    .pipe(webpack(webpackConfig))
+    .pipe(webpack(webpackConfigDocs))
     .pipe(gulp.dest('./docs/js'));
 });
 
