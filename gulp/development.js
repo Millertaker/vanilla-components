@@ -52,7 +52,7 @@ gulp.task('watch-fe', function(){
 });
 
 gulp.task('webserver', function() {
-  gulp.src('./server/')
+  gulp.src('./docs/')
     .pipe(webserver({
       livereload: true,
       directoryListing: false,
