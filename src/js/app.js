@@ -1,8 +1,0 @@
-/**
-*
-*
-*/
-
-(function(_document){
-
-})(document)

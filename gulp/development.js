@@ -25,15 +25,22 @@ var webserver = require('gulp-webserver');
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 gulp.task('clean', function(cb){
-  rimraf('./public/assets/app', cb);
+  rimraf('./build', cb);
 });
 
 gulp.task('traspile-scripts', function() {
   return gulp.src('./public/src/app.js')
     .pipe(webpack(webpackConfig))
     .pipe(gulp.dest('./build'))
+    .pipe(gulp.dest('./docs/js/vendor'));
+});
+
+gulp.task('docs-scripts', function() {
+  return gulp.src('./public/src/app.js')
+    .pipe(webpack(webpackConfig))
     .pipe(gulp.dest('./docs/js'));
 });
+
 
 gulp.task('less', function(){
   gulp.src('./src/less/**/*.less')
@@ -45,8 +52,8 @@ gulp.task('less', function(){
 });
 
 gulp.task('watch-fe', function(){
-  gulp.watch('./public/src/**/*.js', ['clean','traspile-scripts']);
-  gulp.watch('./public/less/**/*.less', function(){
+  gulp.watch('./src/**/*.js', ['clean','traspile-scripts', 'docs-scripts']);
+  gulp.watch('./less/**/*.less', function(){
     gulp.start('less');
   });
 });
@@ -61,6 +68,6 @@ gulp.task('webserver', function() {
 });
 
 gulp.task('development', function(cb){
-  run('watch-fe', 'clean', 'less', 'traspile-scripts', 'webserver', cb);
+  run('watch-fe', 'clean', 'less', 'traspile-scripts', 'docs-scripts', 'webserver', cb);
 
 });
