@@ -33,7 +33,7 @@ gulp.task('traspile-scripts', function() {
   return gulp.src('./public/src/app.js')
     .pipe(webpack(webpackConfig))
     .pipe(gulp.dest('./build'))
-    .pipe(gulp.dest('./docs/js/vendor'));
+    .pipe(gulp.dest('./docs/js'));
 });
 
 gulp.task('docs-scripts', function() {

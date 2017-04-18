@@ -12,3 +12,4 @@ coverage
 reports
 logs
 .nyc_output
+docs/js
