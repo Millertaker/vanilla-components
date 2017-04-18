@@ -41,7 +41,7 @@ gulp.task('less', function(){
     .pipe(concat('allmin.css'))
     .pipe(less())
     .pipe(gulp.dest('./build'))
-    .pipe(gulp.dest('./public/assets/css'));
+    .pipe(gulp.dest('./server/css'));
 });
 
 gulp.task('watch-fe', function(){
