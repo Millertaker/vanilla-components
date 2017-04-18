@@ -1,1 +1,8 @@
-console.log('This is a test');
+/**
+*
+*
+*/
+
+(function(_document){
+
+})(document)
