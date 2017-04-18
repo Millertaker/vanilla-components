@@ -4,12 +4,6 @@
   "description": "Vanilla Components Builded on ES2015",
   "main": "index.js",
   "dependencies": {},
-  "devDependencies": {},
-  "scripts": {
-    "test": "test"
-  },
-  "author": "@Millertaker",
-  "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.24.0",
     "babel-loader": "^6.4.1",
@@ -23,6 +17,7 @@
     "gulp-shell": "^0.6.3",
     "gulp-uglifycss": "^1.0.8",
     "gulp-watch": "^4.3.11",
+    "gulp-webserver": "^0.9.1",
     "jsdom": "^9.12.0",
     "mocha": "^3.2.0",
     "require-dir": "^0.3.1",
@@ -30,5 +25,10 @@
     "run-sequence": "^1.2.2",
     "webpack": "^2.3.3",
     "webpack-stream": "^3.2.0"
-  }
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "author": "@Millertaker",
+  "license": "ISC"
 }
