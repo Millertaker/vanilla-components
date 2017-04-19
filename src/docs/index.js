@@ -1,2 +1,2 @@
-import wc from './webcomponents';
+import wc from '../../build/webcomponents';
 
