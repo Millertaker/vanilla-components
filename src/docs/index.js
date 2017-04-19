@@ -1,2 +1,4 @@
-import wc from './../../build/webcomponents';
+import {Form} from './../../build/webcomponents';
 
+
+console.log(Form());

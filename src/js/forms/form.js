@@ -11,6 +11,13 @@ const setupFormElementEvents = (config, _document) => {
   };
 }
 
-export {setupFormElementEvents}
+let Form = () => {
+  let init = () => { console.log('init') };
+  return {
+    init
+  }
+}
+
+export default Form;
 
 
