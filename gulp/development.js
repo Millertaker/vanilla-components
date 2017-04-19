@@ -32,8 +32,7 @@ gulp.task('clean', function(cb){
 gulp.task('traspile-scripts', function() {
   return gulp.src('./public/src/app.js')
     .pipe(webpack(webpackConfig))
-    .pipe(gulp.dest('./build'))
-    .pipe(gulp.dest('./src/docs'));
+    .pipe(gulp.dest('./build'));
 });
 
 gulp.task('docs-scripts', function() {
@@ -53,7 +52,8 @@ gulp.task('less', function(){
 });
 
 gulp.task('watch-fe', function(){
-  gulp.watch('./src/**/*.js', ['clean','traspile-scripts', 'docs-scripts']);
+  gulp.watch('./src/js/**/*.js', ['clean','traspile-scripts']);
+  gulp.watch('./src/docs/**/*.js', ['docs-scripts']);
   gulp.watch('./less/**/*.less', function(){
     gulp.start('less');
   });

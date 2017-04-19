@@ -11,14 +11,6 @@ const setupFormElementEvents = (config, _document) => {
   };
 }
 
-const configSearchBar = (config, _document) => {
-  return Object.assign(
-    {},
-    setupFormElementEvents(config, _document)
-  );
-}
-
-
-export {setupFormElementEvents , configSearchBar}
+export {setupFormElementEvents}
 
 
