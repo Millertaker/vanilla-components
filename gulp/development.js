@@ -58,7 +58,7 @@ gulp.task('less', function(){
 gulp.task('watch-fe', function(){
   gulp.watch('./src/js/**/*.js', ['clean','bundle-docs']);
   gulp.watch('./src/docs/**/*.js', ['bundle-docs']);
-  gulp.watch('./less/**/*.less', function(){
+  gulp.watch('./src/less/**/*.less', function(){
     gulp.start('less');
   });
 });

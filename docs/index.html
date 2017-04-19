@@ -6,6 +6,8 @@
 
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="css/allmin.css">
+  <link rel="stylesheet" type="text/css" href="css/docs.css">
 </head>
 <body>
   <header class="">
@@ -16,12 +18,27 @@
   <main>
     <div class="docs-content col-lg-8 col-md-8 col-sm-12 col-xs-12">
 
-      <div class="component-doc">
+      <div id="form" class="component-doc">
         <h2>Form Component</h2>
-
         <p>The form component allow to the devs create basic form that include validations and submit events</p>
+        <div class="functional-example">
+          <form class="form-component form-component-js" action="/q" method="get" >
+            <div class="form-component__form-row">
+              <label class="col-lg-4 col-md-4 col-sm-12 col-xs-12">Name</label>
+              <input class="form-control" type="text" name="name">
+            </div>
+            <div class="form-component__form-row">
+              <label class="col-lg-4 col-md-4 col-sm-12 col-xs-12">Lastname</label>
+              <input class="form-control" type="text" name="name">
+            </div>
+            <div class="form-component__form-row">
+              <input class="btn btn-default" type="submit" name="" value="Submit">
+            </div>
+          </form>
+        </div>
       </div>
     </div>
+
     <div class="navigation-links col-lg-4 col-md-4 hidden-xs hidden-sm">
       <nav>
         <a href="#form">Form</a>
