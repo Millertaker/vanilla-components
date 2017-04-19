@@ -1,3 +1,2 @@
-((_document) => {
-  console.log('Hello docs');
-})(document)
+import wc from './webcomponents';
+

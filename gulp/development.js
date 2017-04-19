@@ -16,8 +16,8 @@ var less = require('gulp-less');
 var plumber = require('gulp-plumber');
 
 var webpack = require('webpack-stream');
-var webpackConfig = require('../webpack.config.js');
-var webpackConfigDocs = require('../webpack.config.docs.js');
+var webpackConfig = require('./webpack.config.js');
+var webpackConfigApp = require('./webpack.config.app.js');
 
 var webserver = require('gulp-webserver');
 
@@ -33,12 +33,12 @@ gulp.task('traspile-scripts', function() {
   return gulp.src('./public/src/app.js')
     .pipe(webpack(webpackConfig))
     .pipe(gulp.dest('./build'))
-    .pipe(gulp.dest('./docs/js'));
+    .pipe(gulp.dest('./src/docs'));
 });
 
 gulp.task('docs-scripts', function() {
-  return gulp.src('./public/src/app.js')
-    .pipe(webpack(webpackConfigDocs))
+  return gulp.src('./public/docs/index.js')
+    .pipe(webpack(webpackConfigApp))
     .pipe(gulp.dest('./docs/js'));
 });
 

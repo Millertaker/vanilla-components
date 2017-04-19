@@ -4,7 +4,9 @@ module.exports = {
   entry: './src/js/app.js',
   output: {
     path: path.resolve(__dirname, 'build'),
-    filename: 'vanilla.components.min.js'
+    filename: 'webcomponents.js',
+    library: 'WebComponents',
+    libraryTarget:'umd'
   },
   module: {
     loaders: [{
