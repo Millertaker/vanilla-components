@@ -1,20 +1,70 @@
 
-const setupFormElementEvents = (config, _document) => {
-  let formSelector = `.${config.formSelector}`;
-  let inputSelector = `${formSelector} .${config.inputSelector}`;
-  let submitButton = `${formSelector} .${config.submitSelector}`;
+const Form = (selector, doc) => {
+  let formSelector;
+  let _document = doc;
+  let ajaxUrl;
+  let method;
 
-  return {
-    setupOnClickSubmit: (cb) => { _document.querySelector(submitButton).onclick = cb },
-    setupOnKeyPress: (cb) => { _document.querySelector(inputSelector).onkeyup = cb },
-    formSelector: _document.querySelector(formSelector)
+  const setupEventAjaxSubmit = (cb) => {
+    formSelector.onsubmit = (e) => {
+      e.preventDefault();
+
+      sendData()
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((response) => {
+          console.log(response);
+        });
+
+      let data = {};
+      cb(e, data);
+    };
   };
-}
 
-let Form = () => {
-  let init = () => { console.log('init') };
+  const sendData = () => {
+    return new Promise ((resolve, reject) => {
+      try{
+        let request = new XMLHttpRequest();
+
+        request.open(method, ajaxUrl);
+        request.send();
+
+        request.onload = (e) => {
+          console.log(request.status);
+          if (request.status >= 200 && request.status < 300) {
+            resolve(request.response);
+          } else {
+            reject({
+              status: request.status,
+              statusText: response.statusText
+            });
+          }
+        }
+      } catch (error){
+        reject({status: error.message});
+      }
+    });
+
+  };
+
+  const initForm = (selector) => {
+    formSelector = _document.querySelector(`.${selector}`);
+    ajaxUrl = formSelector.getAttribute("ajax-url");
+    method = formSelector.getAttribute("method");
+  };
+
+  const init = (cb) => {
+    initForm(selector, _document);
+
+    if(formSelector.getAttribute("ajax-enabled") === "true"){
+      setupEventAjaxSubmit(cb)
+    }
+  };
+
   return {
-    init
+    init,
+    formSelector
   }
 }
 
