@@ -1,12 +1,12 @@
 
 const Form = (selector, doc) => {
-  let formSelector;
-  let _document = doc;
+  let element;
+  let _document;
   let ajaxUrl;
   let method;
 
   const setupEventAjaxSubmit = (cb) => {
-    formSelector.onsubmit = (e) => {
+    element.onsubmit = (e) => {
       e.preventDefault();
 
       sendData()
@@ -45,22 +45,23 @@ const Form = (selector, doc) => {
   };
 
   const initForm = (selector) => {
-    formSelector = _document.querySelector(`.${selector}`);
-    ajaxUrl = formSelector.getAttribute("ajax-url");
-    method = formSelector.getAttribute("method");
+    element = _document.querySelector(`.${selector}`);
+    ajaxUrl = element.getAttribute("ajax-url");
+    method = element.getAttribute("method");
   };
 
   const init = (cb) => {
+    _document = doc;
     initForm(selector, _document);
 
-    if(formSelector.getAttribute("ajax-enabled") === "true"){
+    if(element.getAttribute("ajax-enabled") === "true"){
       setupEventAjaxSubmit(cb)
     }
   };
 
   return {
     init,
-    formSelector
+    element
   }
 }
 
