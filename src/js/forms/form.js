@@ -1,9 +1,6 @@
 
-const Form = (selector, doc) => {
-  let element;
-  let _document;
-  let ajaxUrl;
-  let method;
+const Form = (config) => {
+  let element, method, ajaxUrl, ajaxEnabled;
 
   const setupEventAjaxSubmit = (cb) => {
     element.onsubmit = (e) => {
@@ -14,6 +11,7 @@ const Form = (selector, doc) => {
           cb(e, response);
         })
         .catch((response) => {
+          console.log('Error: ')
           console.log(response);
         });
     };
@@ -44,23 +42,26 @@ const Form = (selector, doc) => {
 
   };
 
-  const initForm = (selector) => {
-    element = _document.querySelector(`.${selector}`);
-    ajaxUrl = element.getAttribute("ajax-url");
-    method = element.getAttribute("method");
+  const initElement = (selector) => {
+    config.element = config.document.querySelector(`.${config.selector}`);
+
+    element = config.element;
+    ajaxUrl = config.ajaxUrl = element.getAttribute("ajax-url");
+    method = config.method = element.getAttribute("method");
+    ajaxEnabled = config.ajaxEnabled = element.getAttribute("ajax-enabled");
   };
 
   const init = (cb) => {
-    _document = doc;
-    initForm(selector, _document);
+    initElement(config.selector, config.document);
 
-    if(element.getAttribute("ajax-enabled") === "true"){
+    if(ajaxEnabled === "true"){
       setupEventAjaxSubmit(cb)
     }
   };
 
   return {
     init,
+    config,
     element
   }
 }

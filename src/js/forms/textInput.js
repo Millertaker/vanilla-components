@@ -1,15 +1,15 @@
-const TextInput = (selector, doc) => {
+import Input from './input';
+
+const TextInput = (config) => {
   let element;
-  let _documen;
+  let _document;
 
-  const init = () => {
-    _documen = docs;
-  };
+  return Object.assign(
+    {
 
-  return {
-    init,
-    element
-  };
+    },
+    Input(config)
+  );
 }
 
 export default TextInput;
