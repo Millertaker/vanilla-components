@@ -11,14 +11,11 @@ const Form = (selector, doc) => {
 
       sendData()
         .then((response) => {
-          console.log(response);
+          cb(e, response);
         })
         .catch((response) => {
           console.log(response);
         });
-
-      let data = {};
-      cb(e, data);
     };
   };
 
@@ -31,7 +28,6 @@ const Form = (selector, doc) => {
         request.send();
 
         request.onload = (e) => {
-          console.log(request.status);
           if (request.status >= 200 && request.status < 300) {
             resolve(request.response);
           } else {
