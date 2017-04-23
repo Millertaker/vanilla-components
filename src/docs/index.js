@@ -9,7 +9,10 @@ import {TextInput} from './../../build/webcomponents';
   *
   * Form documentation
   */
-  Form({ 'selector': 'form-component-js', 'document': d }).init()((e, response) => {console.log(e)} );
-  TextInput({ 'selector': 'text-input-component-js', 'document': d });
+  let myform = Form({ 'selector': 'form-component-js', 'document': d });
+  myform.init();
+  myform.setupEventAjaxSubmit((e, response) => {console.log(e)} );
+
+  let myFormNameField = TextInput({ 'selector': 'text-input-component-js', 'document': d });
 
 })(document)

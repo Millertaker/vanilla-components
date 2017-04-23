@@ -1,19 +1,24 @@
 
 const Form = (config) => {
   let element, method, ajaxUrl, ajaxEnabled;
+  let errorBaseMessage = "Form Component error: ";
 
   const setupEventAjaxSubmit = (cb) => {
-    element.onsubmit = (e) => {
-      e.preventDefault();
+    if(ajaxEnabled === "true"){
+      element.onsubmit = (e) => {
+        e.preventDefault();
 
-      sendData()
-        .then((response) => {
-          cb(e, response);
-        })
-        .catch((response) => {
-          console.log(response);
-        });
-    };
+        sendData()
+          .then((response) => {
+            cb(e, response);
+          })
+          .catch((response) => {
+            console.log(response);
+          });
+      };
+    } else {
+      console.log(errorBaseMessage, 'the form element should be setted as ajax fork')
+    }
   };
 
   const sendData = () => {
@@ -52,16 +57,13 @@ const Form = (config) => {
 
   const init = (cb) => {
     initElement(config.selector, config.document);
-
-    if(ajaxEnabled === "true"){
-      return setupEventAjaxSubmit
-    }
   };
 
   return {
     init,
     config,
-    element
+    element,
+    setupEventAjaxSubmit
   }
 }
 
