@@ -11,7 +11,6 @@ const Form = (config) => {
           cb(e, response);
         })
         .catch((response) => {
-          console.log('Error: ')
           console.log(response);
         });
     };
