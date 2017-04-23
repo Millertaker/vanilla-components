@@ -3,21 +3,30 @@ const Input = (config) => {
   let _document;
 
   const initElement = () => {
-    let element = _document.querySelector(`.${config.selector}`);
-    config.element = element;
+    config.element = element = config.document.querySelector(`.${config.selector}`);
   }
 
-  const init = () => {
+  const setupListeners = (cb) => {
+
+  }
+
+  const setupKeyUpListener =() => {
+
+  }
+
+  const init = (cb) => {
     _document = config.document;
     initElement();
+
+    if(element.getAttribute('required') === 'true' && cb != undefined){
+      setupListeners(cb);
+    }
   };
 
   init();
 
   return {
-    init,
-    config,
-    element
+    init
   };
 }
 

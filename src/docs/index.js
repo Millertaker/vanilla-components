@@ -9,16 +9,7 @@ import {TextInput} from './../../build/webcomponents';
   *
   * Form documentation
   */
-  Form({
-      'selector': 'form-component-js',
-      'document': d
-    }).init(function(e, data){
-    alert('Form was submited');
-    });
-
-  TextInput({
-      'selector': 'text-input-component-js',
-      'document': d
-    });
+  Form({ 'selector': 'form-component-js', 'document': d }).init()((e, response) => {console.log(e)} );
+  TextInput({ 'selector': 'text-input-component-js', 'document': d });
 
 })(document)

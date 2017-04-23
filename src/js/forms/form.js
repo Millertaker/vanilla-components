@@ -44,17 +44,17 @@ const Form = (config) => {
   const initElement = (selector) => {
     config.element = config.document.querySelector(`.${config.selector}`);
 
-    element = config.element;
-    ajaxUrl = config.ajaxUrl = element.getAttribute("ajax-url");
-    method = config.method = element.getAttribute("method");
-    ajaxEnabled = config.ajaxEnabled = element.getAttribute("ajax-enabled");
+    config.element = element = config.element;
+    config.ajaxUrl = ajaxUrl = config.ajaxUrl = element.getAttribute("ajax-url");
+    config.method = method = config.method = element.getAttribute("method");
+    config.ajaxEnabled = ajaxEnabled = config.ajaxEnabled = element.getAttribute("ajax-enabled");
   };
 
   const init = (cb) => {
     initElement(config.selector, config.document);
 
     if(ajaxEnabled === "true"){
-      setupEventAjaxSubmit(cb)
+      return setupEventAjaxSubmit
     }
   };
 
