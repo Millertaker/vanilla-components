@@ -55,12 +55,9 @@ const Form = (config) => {
     config.ajaxEnabled = ajaxEnabled = config.ajaxEnabled = element.getAttribute("ajax-enabled");
   };
 
-  const init = (cb) => {
-    initElement(config.selector, config.document);
-  };
+  initElement(config.selector, config.document);
 
   return {
-    init,
     config,
     element,
     setupEventAjaxSubmit
