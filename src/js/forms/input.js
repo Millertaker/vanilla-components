@@ -1,32 +1,78 @@
 const Input = (config) => {
   let element;
   let _document;
+  let errorBaseMessage = "Input Component error: ";
+  let isFieldEmpty = true;
+  let fieldCorrectFormat = false;
+  let emptyFieldMessage;
+
 
   const initElement = () => {
-    config.element = element = config.document.querySelector(`.${config.selector}`);
-  }
-
-  const setupListeners = (cb) => {
-
-  }
-
-  const setupKeyUpListener =() => {
-
-  }
-
-  const init = (cb) => {
     _document = config.document;
-    initElement();
+    config.element = element = _document.querySelectorAll(`.${config.selector}`);
 
-    if(element.getAttribute('required') === 'true' && cb != undefined){
-      setupListeners(cb);
+
+    element.forEach( (item, index) => {
+      config.isRequired = config.isRequired || {};
+      config.datatype = config.datatype || {};
+      config.isRequired[index] = item.getAttribute('required-field');
+      config.datatype[index] = datatype = item.getAttribute('required-type');
+    })
+
+    console.log(config);
+  }
+
+  const setupKeyUpListener = (cb) => {
+    console.log(element);
+
+    element.onkeyup = (e) => {
+
+      //validate entries
+      validateEntry()
     }
-  };
+  }
 
-  init();
+  const validateEntry = () => {
+    let result = true;
+
+    if(datatype == 'text')
+      result = result && validateNonEmpty();
+    if(datatype == 'email')
+      result = result && validateEmail();
+
+    console.log(result);
+  }
+
+  const validateNonEmpty = () => {
+    return element.value.length > 0;
+  }
+
+  const validateEmail = ()=> {
+    let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+
+    return re.test(element.value);
+  }
+
+  const validateDate = () => {
+
+  }
+
+  const validatePassword = () => {
+
+  }
+
+  const validateNumber = () => {
+
+  }
+
+  initElement();
 
   return {
-    init
+    setupKeyUpListener,
+    errorBaseMessage,
+    emptyFieldMessage,
+    isFieldEmpty,
+    fieldCorrectFormat
   };
 }
 
