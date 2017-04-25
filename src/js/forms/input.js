@@ -12,45 +12,50 @@ const Input = (config) => {
     config.element = element = _document.querySelectorAll(`.${config.selector}`);
 
 
-    element.forEach( (item, index) => {
-      config.isRequired = config.isRequired || {};
-      config.datatype = config.datatype || {};
-      config.isRequired[index] = item.getAttribute('required-field');
-      config.datatype[index] = datatype = item.getAttribute('required-type');
-    })
+    element.forEach((item, index) => {
+      config[index] = {};
+      config[index].isRequired = config[index].isRequired || {};
+      config[index].datatype = config[index].datatype || {};
+      config[index].isRequired = item.getAttribute('required-field');
+      config[index].datatype = item.getAttribute('required-type');
 
-    console.log(config);
+
+      item.getAttribute('required-field') && item.value.length > 0 ?
+        item.setAttribute('required-result',  validateEntry(item, true)) :
+        item.setAttribute('required-result',  validateEntry(item, false));
+    })
   }
 
   const setupKeyUpListener = (cb) => {
-    console.log(element);
+    element.forEach((item, i) => {
+      item.onkeyup = (e) => {
+        item.setAttribute('required-result',  validateEntry(item, i));
+      }
+    });
 
-    element.onkeyup = (e) => {
-
-      //validate entries
-      validateEntry()
-    }
+    cb ? cb() : null;
   }
 
-  const validateEntry = () => {
-    let result = true;
+  const validateEntry = (item, index) => {
+    let result;
+    let datatype = typeof index === 'number' ? config[index].datatype : null ;
 
     if(datatype == 'text')
-      result = result && validateNonEmpty();
+      return validateNonEmpty(item);
     if(datatype == 'email')
-      result = result && validateEmail();
+      return validateEmail(item);
 
-    console.log(result);
+    return result;
   }
 
-  const validateNonEmpty = () => {
-    return element.value.length > 0;
+  const validateNonEmpty = (e) => {
+    return e.value.length > 0;
   }
 
-  const validateEmail = ()=> {
+  const validateEmail = (e)=> {
     let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
-    return re.test(element.value);
+    return re.test(e.value);
   }
 
   const validateDate = () => {

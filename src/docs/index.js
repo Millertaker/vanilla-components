@@ -13,6 +13,6 @@ import {TextInput} from './../../build/webcomponents';
   myform.setupEventAjaxSubmit((e, response) => {console.log(e)} );
 
   let myFormNameField = TextInput({ 'selector': 'text-input-component-js', 'document': d });
-  myFormNameField.setupKeyUpListener((e) => {});
+  myFormNameField.setupKeyUpListener();
 
 })(document)
