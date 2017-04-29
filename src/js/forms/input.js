@@ -11,14 +11,12 @@ const Input = (config) => {
     _document = config.document;
     config.element = element = _document.querySelectorAll(`.${config.selector}`);
 
-
     element.forEach((item, index) => {
       config[index] = {};
       config[index].isRequired = config[index].isRequired || {};
       config[index].datatype = config[index].datatype || {};
       config[index].isRequired = item.getAttribute('required-field');
       config[index].datatype = item.getAttribute('required-type');
-
 
       item.getAttribute('required-field') && item.value.length > 0 ?
         item.setAttribute('required-result',  validateEntry(item, true)) :
@@ -45,7 +43,7 @@ const Input = (config) => {
     if(datatype == 'email')
       return validateEmail(item);
 
-    return result;
+    return false;
   }
 
   const validateNonEmpty = (e) => {
