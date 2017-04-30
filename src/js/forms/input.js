@@ -18,9 +18,9 @@ const Input = (config) => {
       config[index].isRequired = item.getAttribute('required-field');
       config[index].datatype = item.getAttribute('required-type');
 
-      item.getAttribute('required-field') && item.value.length > 0 ?
-        item.setAttribute('required-result',  validateEntry(item, true)) :
-        item.setAttribute('required-result',  validateEntry(item, false));
+      item.getAttribute('required-field') === "true" && validateEntry(item, index) ?
+        item.setAttribute('required-result',  true) :
+        item.setAttribute('required-result',  false);
     })
   }
 
@@ -38,10 +38,12 @@ const Input = (config) => {
     let result;
     let datatype = typeof index === 'number' ? config[index].datatype : null ;
 
-    if(datatype == 'text')
+    if(datatype == 'text'){
       return validateNonEmpty(item);
-    if(datatype == 'email')
+    }
+    if(datatype == 'email'){
       return validateEmail(item);
+    }
 
     return false;
   }
@@ -75,7 +77,8 @@ const Input = (config) => {
     errorBaseMessage,
     emptyFieldMessage,
     isFieldEmpty,
-    fieldCorrectFormat
+    fieldCorrectFormat,
+    element
   };
 }
 
