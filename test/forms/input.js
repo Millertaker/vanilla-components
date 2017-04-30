@@ -2,9 +2,7 @@ import common from '../common';
 const options = common.options;
 const assert = common.assert;
 import chai from 'chai';
-
-const jsdom = require("jsdom");
-const { JSDOM } = jsdom;
+import {JSDOM} from 'jsdom';
 
 
 import Input from '../../src/js/forms/input'
@@ -18,31 +16,44 @@ describe('Input component test', () => {
       <input class="form-control text-input-component text-input-component-js" type="text" name="name">
     </div>`;
 
-    const {window} = new JSDOM(inputDOMMarkup)
-    console.log(window);
-
-    let document = jsdom(inputDOMMarkup);
-    //let window = document.defaultView;
-
-    let input = Input({selector: 'text-input-component-js', document});
+    const dom = new JSDOM(`<!DOCTYPE html><body>${inputDOMMarkup}</body>`);
+    let input = Input({selector: 'text-input-component-js', document: dom.window.document});
 
     assert.equal(typeof input,  'object', 'the returned value is a Object');
   });
 
-  it('Should be validated as not empty', () => {
+  it('Should be validated as email', () => {
     let inputDOMMarkup =
-    `<div class="form-component__form-row">
+    `<html><body><div class="form-component__form-row">
       <label class="col-lg-4 col-md-4 col-sm-12 col-xs-12">Name</label>
       <input class="form-control text-input-component text-input-component-js" required-type="email" required-field="true" type="text" name="name">
-    </div>`;
+    </div></body></html>`;
 
-    let document = jsdom(inputDOMMarkup);
-    let window = document.defaultView;
+    const dom = new JSDOM(`<!DOCTYPE html><body>${inputDOMMarkup}</body>`);
 
-    let notEmptyInput = Input({selector: 'text-input-component-js', document});
-    console.log(notEmptyInput.element[0].getAttribute('hola'));
+    //setting some content on input field
+    dom.window.document.querySelector('.text-input-component-js').value = 'millerigac@hotmail.com';
 
-    assert.equal(true, true, 'Asset ok');
+    let notEmptyInput = Input({selector: 'text-input-component-js', document: dom.window.document});
+
+    assert.equal(notEmptyInput.element[0].getAttribute('required-result'), 'true', 'The content has setted as email');
+  });
+
+  it('Should be validated as not email', () => {
+    let inputDOMMarkup =
+    `<html><body><div class="form-component__form-row">
+      <label class="col-lg-4 col-md-4 col-sm-12 col-xs-12">Name</label>
+      <input class="form-control text-input-component text-input-component-js" required-type="email" required-field="true" type="text" name="name">
+    </div></body></html>`;
+
+    const dom = new JSDOM(`<!DOCTYPE html><body>${inputDOMMarkup}</body>`);
+
+    //setting some content on input field
+    dom.window.document.querySelector('.text-input-component-js').value = 'im a cat';
+
+    let notEmptyInput = Input({selector: 'text-input-component-js', document: dom.window.document});
+
+    assert.equal(notEmptyInput.element[0].getAttribute('required-result'), 'false', 'The content has setted as email');
   });
 });
 
