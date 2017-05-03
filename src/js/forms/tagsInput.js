@@ -1,9 +1,12 @@
 import Input from './input';
 
-const tagsInput = function(config){
-  console.log('hola');
+const TagsInput = function(config){
+
 
   return Object.assign({},
-    Input(config);
+    Input(config)
   )
 }
+
+
+export default TagsInput;
