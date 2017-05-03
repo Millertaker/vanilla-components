@@ -18,6 +18,32 @@
   <main>
     <div class="docs-content col-lg-8 col-md-8 col-sm-12 col-xs-12">
 
+      <div id="text-input" class="component-doc">
+        <h2>Text Input Component</h2>
+        <p>The text input component allows setup validatos and keyup events for the component</p>
+        <div class="functional-example">
+          <form class="example-form-component-js form-component form-component-js" ajax-enabled="true" ajax-url="mocks/simpleFormRequest.json" action="/q" method="get">
+            <div class="form-component__form-row">
+              <label class="col-lg-4 col-md-4 col-sm-12 col-xs-12">Name</label>
+              <input class="form-control text-input-component text-input-component-js" required-type="email" required-field="true" type="text" name="name">
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div id="tags-input" class="component-doc">
+        <h2>Tags Input Component</h2>
+        <p>The tags input component allows add and removes a data list of tags created separated by semicolom</p>
+        <div class="functional-example">
+          <form class="example-form-component-js form-component form-component-js" ajax-enabled="true" ajax-url="mocks/simpleFormRequest.json" action="/q" method="get">
+            <div class="form-component__form-row">
+              <label class="col-lg-4 col-md-4 col-sm-12 col-xs-12">Name</label>
+              <input class="form-control text-input-component text-input-component-js" required-type="email" required-field="true" type="text" name="name">
+            </div>
+          </form>
+        </div>
+      </div>
+
       <div id="form" class="component-doc">
         <h2>Form Component</h2>
         <p>The form component allow to the devs create basic form that include validations and submit events</p>
@@ -40,8 +66,9 @@
     </div>
 
     <div class="navigation-links col-lg-4 col-md-4 hidden-xs hidden-sm">
-      <nav>
-        <a href="#form">Form</a>
+      <nav class="docs-main-menu">
+        <a class="item" href="#text-input">Text Input</a>
+        <a class="item" href="#form">Form</a>
       </nav>
     </div>
   </main>

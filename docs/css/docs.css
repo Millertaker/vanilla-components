@@ -2,3 +2,11 @@
   display: fixed;
 }
 
+.docs-main-menu{
+
+}
+
+.docs-main-menu .item{
+  width: 100%;
+  display: block;
+}

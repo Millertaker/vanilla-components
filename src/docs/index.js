@@ -15,6 +15,4 @@ import {TextInput} from './../../build/webcomponents';
   let myFormNameField = TextInput({ 'selector': 'text-input-component-js', 'document': d });
   myFormNameField.setupKeyUpListener();
 
-  console.log(myFormNameField.element);
-
 })(document)
