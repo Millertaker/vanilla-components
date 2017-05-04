@@ -17,8 +17,6 @@ import {TagsInput} from './../../build/webcomponents';
   let TextInputElements = TextInput({ 'selector': 'text-input-component-js', 'document': d });
   TextInputElements.setupKeyUpListener();
 
-  console.log(TextInputElements);
-
   /*
   *
   * Tags input documentation
