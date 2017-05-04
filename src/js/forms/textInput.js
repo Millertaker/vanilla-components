@@ -1,6 +1,6 @@
 import Input from './input';
 
-const TextInput = (config) => {
+const TextInput = function(config){
   return Object.assign(
     {
 

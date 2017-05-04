@@ -1,11 +1,11 @@
 
-const Form = (config) => {
+const Form = function(config){
   let element, method, ajaxUrl, ajaxEnabled;
   let errorBaseMessage = "Form Component error: ";
 
-  const setupEventAjaxSubmit = (cb) => {
+  const setupEventAjaxSubmit = function(cb){
     if(ajaxEnabled === "true"){
-      element.onsubmit = (e) => {
+      element.onsubmit = function(e){
         e.preventDefault();
 
         sendData()
@@ -21,7 +21,7 @@ const Form = (config) => {
     }
   };
 
-  const sendData = () => {
+  const sendData = function(){
     return new Promise ((resolve, reject) => {
       try{
         let request = new XMLHttpRequest();
@@ -46,7 +46,7 @@ const Form = (config) => {
 
   };
 
-  const initElement = (selector) => {
+  const initElement = function(selector){
     config.element = config.document.querySelector(`.${config.selector}`);
 
     config.element = element = config.element;
