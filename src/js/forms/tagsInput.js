@@ -3,9 +3,10 @@ import Input from './input';
 const TagsInput = function(config){
 
 
-  return Object.assign({},
-    Input(config)
-  )
+
+  let factory = Object.create(Input(config));
+
+  return factory;
 }
 
 

@@ -14,14 +14,20 @@ import {TagsInput} from './../../build/webcomponents';
   *
   * Text input documentation
   */
-  let TextInputElements = TextInput({ 'selector': 'text-input-component-js', 'document': d });
+  let TextInputElements = TextInput({
+    'selector': 'text-input-component-js',
+    'document': d
+  });
   TextInputElements.setupKeyUpListener();
 
   /*
   *
   * Tags input documentation
   */
-  let TagsInputElement = TagsInput({ 'selector': 'tags-input-component-js', 'document': d });
+  let TagsInputElement = TagsInput({
+    'selector': 'tags-input-component-js',
+    'document': d
+  });
   TagsInputElement.setupKeyUpListener();
 
 })(document)

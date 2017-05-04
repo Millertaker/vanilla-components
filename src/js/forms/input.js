@@ -13,24 +13,22 @@ const Input = function(config){
 
     element.forEach((item, index) => {
       config[index] = {};
-      config[index].isRequired = config[index].isRequired || {};
-      config[index].datatype = config[index].datatype || {};
       config[index].isRequired = item.getAttribute('required-field');
       config[index].datatype = item.getAttribute('required-type');
 
       item.getAttribute('required-field') === "true" && validateEntry(item, index) ?
         item.setAttribute('required-result',  true) :
         item.setAttribute('required-result',  false);
+
+      item.onkeyup = (e) => {
+        console.log(e);
+        item.setAttribute('required-result',  validateEntry(item, index));
+      };
+
     })
   }
 
   const setupKeyUpListener = function(cb){
-    element.forEach((item, i) => {
-      item.onkeyup = (e) => {
-        item.setAttribute('required-result',  validateEntry(item, i));
-      }
-    });
-
     cb ? cb() : null;
   }
 
