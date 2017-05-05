@@ -5,6 +5,7 @@ const Input = function(config){
   let isFieldEmpty = true;
   let fieldCorrectFormat = false;
   let emptyFieldMessage;
+  let id = config.document.DataGenerator.getNewGUID();
 
 
   const initElement = function(){
@@ -12,23 +13,39 @@ const Input = function(config){
     config.element = element = _document.querySelectorAll(`.${config.selector}`);
 
     element.forEach((item, index) => {
-      config[index] = {};
-      config[index].isRequired = item.getAttribute('required-field');
-      config[index].datatype = item.getAttribute('required-type');
-
-      item.getAttribute('required-field') === "true" && validateEntry(item, index) ?
-        item.setAttribute('required-result',  true) :
-        item.setAttribute('required-result',  false);
-
-      item.onkeyup = (e) => {
-        console.log(e);
-        item.setAttribute('required-result',  validateEntry(item, index));
-      };
-
+      setupProperties(item, index);
+      getRequiredFieldProperties(item, index);
+      setUpDOMEvents(item, index);
     })
   }
 
-  const setupKeyUpListener = function(cb){
+  const setUpDOMEvents = function(item, index){
+    item.onkeyup = (e) => {
+      if(item.getAttribute('required-field') === "true"){
+        item.setAttribute('required-result',  validateEntry(item, index));
+      }
+
+      if(config.onKeyup){
+        config.onKeyup(e);
+      }
+    };
+  }
+
+  const getRequiredFieldProperties = function(item, index){
+    item.getAttribute('required-field') === "true" && validateEntry(item, index) ?
+      item.setAttribute('required-result',  true) :
+      item.setAttribute('required-result',  false);
+  }
+
+  const setupProperties = function(item, index){
+    config[index] = {};
+    config[index].isRequired = item.getAttribute('required-field');
+    config[index].datatype = item.getAttribute('required-type');
+
+
+  }
+
+  const onKeyup = function(cb){
     cb ? cb() : null;
   }
 
@@ -71,7 +88,7 @@ const Input = function(config){
   initElement();
 
   return {
-    setupKeyUpListener,
+    onKeyup,
     errorBaseMessage,
     emptyFieldMessage,
     isFieldEmpty,

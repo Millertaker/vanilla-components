@@ -2,6 +2,7 @@
 const Form = function(config){
   let element, method, ajaxUrl, ajaxEnabled;
   let errorBaseMessage = "Form Component error: ";
+  let id = config.document.DataGenerator.getNewGUID();
 
   const setupEventAjaxSubmit = function(cb){
     if(ajaxEnabled === "true"){

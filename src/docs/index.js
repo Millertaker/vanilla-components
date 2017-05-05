@@ -1,6 +1,9 @@
 import {Form} from './../../build/webcomponents';
 import {TextInput} from './../../build/webcomponents';
 import {TagsInput} from './../../build/webcomponents';
+import {DataGenerator} from './../../build/webcomponents';
+
+document.DataGenerator =  DataGenerator.getInstance();
 
 ((d) => {
   /*
@@ -16,9 +19,12 @@ import {TagsInput} from './../../build/webcomponents';
   */
   let TextInputElements = TextInput({
     'selector': 'text-input-component-js',
-    'document': d
+    'document': d,
+    'onKeyup': (e) => {
+      console.log('key up!!', e);
+    }
   });
-  TextInputElements.setupKeyUpListener();
+
 
   /*
   *
@@ -28,6 +34,8 @@ import {TagsInput} from './../../build/webcomponents';
     'selector': 'tags-input-component-js',
     'document': d
   });
-  TagsInputElement.setupKeyUpListener();
+  TagsInputElement.onKeyup((e) => {
+
+  });
 
 })(document)
