@@ -3,33 +3,28 @@ const options = common.options;
 const assert = common.assert;
 import chai from 'chai';
 import {JSDOM} from 'jsdom';
+import * as htmlMocks from '../mocks/html';
 
-
-import Input from '../../src/js/forms/input'
+import Input from '../../src/js/forms/input';
+import DataGenerator from '../../src/js/globals/common';
 
 describe('Input component test', () => {
   it('Should exists as object', () => {
 
-    let inputDOMMarkup =
-    `<div class="form-component__form-row">
-      <label class="col-lg-4 col-md-4 col-sm-12 col-xs-12">Name</label>
-      <input class="form-control text-input-component text-input-component-js" type="text" name="name">
-    </div>`;
-
+    let inputDOMMarkup = htmlMocks.textInput;
     const dom = new JSDOM(`<!DOCTYPE html><body>${inputDOMMarkup}</body>`);
+
+    dom.window.document.DataGenerator = DataGenerator.getInstance();
     let input = Input({selector: 'text-input-component-js', document: dom.window.document});
 
     assert.equal(typeof input,  'object', 'the returned value is a Object');
   });
 
   it('Should be validated as email', () => {
-    let inputDOMMarkup =
-    `<html><body><div class="form-component__form-row">
-      <label class="col-lg-4 col-md-4 col-sm-12 col-xs-12">Name</label>
-      <input class="form-control text-input-component text-input-component-js" required-type="email" required-field="true" type="text" name="name">
-    </div></body></html>`;
+    let inputDOMMarkup = htmlMocks.textEmailInput
 
     const dom = new JSDOM(`<!DOCTYPE html><body>${inputDOMMarkup}</body>`);
+    dom.window.document.DataGenerator = DataGenerator.getInstance();
 
     //setting some content on input field
     dom.window.document.querySelector('.text-input-component-js').value = 'millerigac@hotmail.com';
@@ -40,13 +35,11 @@ describe('Input component test', () => {
   });
 
   it('Should be validated as not email', () => {
-    let inputDOMMarkup =
-    `<html><body><div class="form-component__form-row">
-      <label class="col-lg-4 col-md-4 col-sm-12 col-xs-12">Name</label>
-      <input class="form-control text-input-component text-input-component-js" required-type="email" required-field="true" type="text" name="name">
-    </div></body></html>`;
+    let inputDOMMarkup = htmlMocks.nonEmtyInput;
+
 
     const dom = new JSDOM(`<!DOCTYPE html><body>${inputDOMMarkup}</body>`);
+    dom.window.document.DataGenerator = DataGenerator.getInstance();
 
     //setting some content on input field
     dom.window.document.querySelector('.text-input-component-js').value = 'im a cat';
@@ -57,17 +50,17 @@ describe('Input component test', () => {
   });
 
   it('Should have a keyup event set', () => {
-    let inputDOMMarkup =
-    `<div class="form-component__form-row">
-      <label class="col-lg-4 col-md-4 col-sm-12 col-xs-12">Name</label>
-      <input class="form-control text-input-component text-input-component-js" type="text" name="name">
-    </div>`;
+    let inputDOMMarkup = htmlMocks.setUpKeyEventInput;
 
     const dom = new JSDOM(`<!DOCTYPE html><body>${inputDOMMarkup}</body>`);
+    dom.window.document.DataGenerator = DataGenerator.getInstance();
     let document = dom.window.document;
 
-    let input = Input({selector: 'text-input-component-js', document});
-    input.setupKeyUpListener((e) => {});
+    let input = Input({
+      selector: 'text-input-component-js',
+      document,
+      onKeyup: (e) => {}
+    });
 
     assert.isFunction(document.querySelector('.text-input-component-js').onkeyup, 'The key up event is handled');
   });

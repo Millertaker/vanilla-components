@@ -1,4 +1,4 @@
-export default function(){
+export default (function(){
   let instance;
 
   const init = function(){
@@ -28,4 +28,4 @@ export default function(){
   return {
     getInstance
   }
-};
+})();
