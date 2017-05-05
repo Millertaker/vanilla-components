@@ -3,7 +3,7 @@ import TextInput from './forms/textInput';
 import TagsInput from './forms/tagsInput';
 import Commons from './globals/common.js';
 
-let DataGenerator = Commons();
+let DataGenerator = Commons;
 
 export {
   Form,
